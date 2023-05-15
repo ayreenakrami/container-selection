@@ -1,7 +1,7 @@
 {
   "name": "container-selector",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "homepage": "https://ayreenakrami.github.io/",
   "dependencies": {
     "@mui/icons-material": "^5.11.16",

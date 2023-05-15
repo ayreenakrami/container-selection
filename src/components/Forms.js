@@ -36,7 +36,7 @@ const UserForm = (props) => {
       volume: Number((length * width * height) / 1000000),
     };
     props.setItems([...props.items, newItem]);
-
+    setError("");
     setLength("");
     setWidth("");
     setHeight("");
