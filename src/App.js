@@ -61,8 +61,6 @@ const App = () => {
     (container) =>
       totalWeight <= container.maxPayloadWeight &&
       totalVolume <= container.maxPayloadVolume &&
-      totalWeight <= container.maxPayloadWeight &&
-      totalVolume <= container.maxPayloadVolume &&
       Math.max(...items.map((item) => item.height)) <= container.height &&
       Math.max(...items.map((item) => item.length)) <= container.length &&
       Math.max(...items.map((item) => item.width)) <= container.width
