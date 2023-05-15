@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 
 const ContainersList = (props) => {
   return (

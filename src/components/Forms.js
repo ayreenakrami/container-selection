@@ -6,7 +6,6 @@ const UserForm = (props) => {
   const [width, setWidth] = useState("");
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
-  const [volume, setVolume] = useState(0);
   const [error, setError] = useState("");
 
   const handleSubmit = () => {
@@ -41,7 +40,6 @@ const UserForm = (props) => {
     setWidth("");
     setHeight("");
     setWeight("");
-    setVolume(0);
   };
 
   return (
