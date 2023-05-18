@@ -9,13 +9,16 @@ import Box from "@mui/material/Box";
 import { CONTAINERS } from './constants/contants';
 
 const App = () => {
-  
+
   const [items, setItems] = useState([]);
 
-  let totalVolume = items.reduce((acc, curr) =>  acc + curr.volume, 0); // Removed "return" as it's a single statement
+  // Removed "return" as it's a single statement.
+  let totalVolume = items.reduce((acc, curr) => acc + curr.volume, 0);
+  // Removed "return" as it's a single statement.
+  let totalWeight = items.reduce((acc, curr) => acc + Number(curr.weight), 0);
 
-  let totalWeight = items.reduce((acc, curr) => acc + Number(curr.weight), 0); // Removed "return" as it's a single statement
-
+  // Previously we were iterating through the items individually for finding the maximum for height, length and width.
+  // Improved this by adding Array.reduce to perform this in a single iteration of the items array.
   const { maxItemHeight, maxItemLength, maxItemWidth } = items.reduce(
     (acc, item) => ({
       maxItemHeight: Math.max(acc.maxItemHeight, item.height),
@@ -25,6 +28,7 @@ const App = () => {
     { maxItemHeight: 0, maxItemLength: 0, maxItemWidth: 0 }
   );
 
+  //Implemented the Array.find function for improving the efficiency of the code to avoid iterating through the complete CONTAINERS Array.
   const bestContainer = CONTAINERS.find(
     ({ maxPayloadWeight, maxPayloadVolume, height, length, width }) =>
       totalWeight <= maxPayloadWeight &&

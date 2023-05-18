@@ -3,7 +3,8 @@ import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, 
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const ItemList = (props) => {
-  // uses the filter method to remove an item from the list based on its unique identifier (id), whereas previously it was using splice with the item's index.
+  //  Used the filter method to remove an item from the list based on its unique identifier (id),  
+  // whereas previously it was using splice with the item's index.
   const handleRemove = (id) => {
     const newItems = props.items.filter((item) => item.id !== id);
     props.setItems(newItems);
@@ -29,7 +30,8 @@ const ItemList = (props) => {
               </TableHead>
               <TableBody>
                 {props.items.map((item, index) => (
-                  <TableRow key={item.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>  // The key attribute in the TableRow component is now set to item.id instead of the index. 
+                  <TableRow key={item.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                    {/* The key attribute in the TableRow component is now set to item.id instead of the index.  */}
                     <TableCell component="th" scope="row">{index + 1}</TableCell>
                     <TableCell>{item.length}</TableCell>
                     <TableCell>{item.width}</TableCell>
@@ -37,7 +39,8 @@ const ItemList = (props) => {
                     <TableCell>{item.weight}</TableCell>
                     <TableCell>{item.volume}</TableCell>
                     <TableCell>
-                      <IconButton onClick={() => handleRemove(item.id)} aria-label="delete"> // Using item.id instead of the index to identify the item being removed.
+                      <IconButton onClick={() => handleRemove(item.id)} aria-label="delete">
+                        {/* Using item.id instead of the index to identify the item being removed.  */}
                         <DeleteIcon />
                       </IconButton>
                     </TableCell>
