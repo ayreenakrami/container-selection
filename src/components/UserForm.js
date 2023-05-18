@@ -28,6 +28,7 @@ const UserForm = (props) => {
 
 
     const newItem = {
+      id: Date.now(),
       length,
       width,
       height,

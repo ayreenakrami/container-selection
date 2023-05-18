@@ -1,74 +1,38 @@
 import React, { useState } from "react";
 import "./App.css";
 import RecommendedContainer from "./components/RecommendedContainer";
-import UserForm from "./components/Forms";
+import UserForm from "./components/UserForm";
 import ItemList from "./components/ItemList";
 import ContainersList from "./components/ContainersList";
 import Header from "./components/Header";
 import Box from "@mui/material/Box";
-
+import { CONTAINERS } from './constants/contants';
 
 const App = () => {
-  const CONTAINERS = [
-    {
-      id: 1,
-      containerType: "20 Standard",
-      length: 589,
-      width: 235,
-      height: 239,
-      maxPayloadWeight: 28200,
-      maxPayloadVolume: 33.2,
-    },
-    {
-      id: 2,
-      containerType: "40 Standard",
-      length: 1202,
-      width: 235,
-      height: 239,
-      maxPayloadWeight: 28200,
-      maxPayloadVolume: 67.7,
-    },
-    {
-      id: 3,
-      containerType: "20 High Cube",
-      length: 598,
-      width: 235,
-      height: 269,
-      maxPayloadWeight: 28200,
-      maxPayloadVolume: 37.3,
-    },
-    {
-      id: 4,
-      containerType: "40 High Cube",
-      length: 1202,
-      width: 235,
-      height: 269,
-      maxPayloadWeight: 28200,
-      maxPayloadVolume: 76.3,
-    },
-  ];
+  
   const [items, setItems] = useState([]);
 
-  let totalVolume = items.reduce((acc, curr) => {
-    return acc + curr.volume;
-  }, 0);
+  let totalVolume = items.reduce((acc, curr) =>  acc + curr.volume, 0); // Removed "return" as it's a single statement
 
-  let totalWeight = items.reduce((acc, curr) => {
-    return acc + Number(curr.weight);
-  }, 0);
+  let totalWeight = items.reduce((acc, curr) => acc + Number(curr.weight), 0); // Removed "return" as it's a single statement
 
-  let bestContainer = CONTAINERS.filter(
-    (container) =>
-      totalWeight <= container.maxPayloadWeight &&
-      totalVolume <= container.maxPayloadVolume &&
-      Math.max(...items.map((item) => item.height)) <= container.height &&
-      Math.max(...items.map((item) => item.length)) <= container.length &&
-      Math.max(...items.map((item) => item.width)) <= container.width
+  const { maxItemHeight, maxItemLength, maxItemWidth } = items.reduce(
+    (acc, item) => ({
+      maxItemHeight: Math.max(acc.maxItemHeight, item.height),
+      maxItemLength: Math.max(acc.maxItemLength, item.length),
+      maxItemWidth: Math.max(acc.maxItemWidth, item.width),
+    }),
+    { maxItemHeight: 0, maxItemLength: 0, maxItemWidth: 0 }
   );
 
-  let matchingContainer = bestContainer.sort(
-    (a, b) => a.maxPayloadVolume - b.maxPayloadVolume
-  )[0];
+  const bestContainer = CONTAINERS.find(
+    ({ maxPayloadWeight, maxPayloadVolume, height, length, width }) =>
+      totalWeight <= maxPayloadWeight &&
+      totalVolume <= maxPayloadVolume &&
+      maxItemHeight <= height &&
+      maxItemLength <= length &&
+      maxItemWidth <= width
+  );
 
   return (
     <Box sx={{ bgcolor: "#f9f9f9" }} display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={2}>
@@ -86,7 +50,7 @@ const App = () => {
           <RecommendedContainer
             totalVolume={totalVolume}
             totalWeight={totalWeight}
-            matchingContainer={matchingContainer}
+            matchingContainer={bestContainer}
           />
         )}
       </Box>
