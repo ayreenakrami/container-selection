@@ -38,6 +38,9 @@ const UserForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (error) return;
+
     if (error || !length || !width || !height || !weight) {
       setError('Please enter values for all fields.'); 
       return;
